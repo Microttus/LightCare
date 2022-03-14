@@ -4,8 +4,8 @@
 
 int photoRPin = A1;
 int photoLPin = A0;
-int motorRPin = 8;
-int motorLPin = 9;
+int motorRPin = 6;
+int motorLPin = 5;
 
 
 void setup() {
@@ -26,7 +26,7 @@ void loop() {
   int lightSum = (lightR + lightL)/2; //Find mean vaue of the two sensores
   int lightDiff = lightR - lightL;      //Find the differance form the two sensores
 
-  int motorBaseSpeed = map(lightSum, 0, 4095, 200, 0);             //Invert the sum for use to speed and allow for turn at max speeed
+  int motorBaseSpeed = constrain(map(lightSum, 2000, 4095, 200, 0),0,200);             //Invert the sum for use to speed and allow for turn at max speeed
   int corrSpeed = map(lightDiff, -4095, 4095, -100, 100);
   
   int motorRSpeed = constrain(motorBaseSpeed - corrSpeed, 0, 255);  //Calcualte speed for right motor and constrain for PWM
